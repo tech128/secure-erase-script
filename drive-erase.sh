@@ -119,7 +119,9 @@ done
 
     # Perform selected erase method
     if [ "$choice" -eq 1 ]; then
+	echo
 	echo "Please wait, drive is erasing."
+	echo
 	drive_inquiry=$(tr -d '\0' < "/sys/block/${drive_list[$((drive_num-1))]}/device/inquiry")
         hdparm --user-master u --security-set-pass "p" "/dev/${drive_list[$((drive_num-1))]}"
         hdparm --user-master u --security-erase "p" "/dev/${drive_list[$((drive_num-1))]}"
@@ -135,7 +137,9 @@ done
         done
 	verify_secure
     elif [ "$choice" -eq 2 ]; then
+	echo
 	echo "Please wait, drive is erasing."
+	echo
 	drive_inquiry=$(tr -d '\0' < "/sys/block/${drive_list[$((drive_num-1))]}/device/inquiry")
         hdparm --user-master u --security-set-pass "p" "/dev/${drive_list[$((drive_num-1))]}"
         hdparm --user-master u --security-erase-enhanced "p" "/dev/${drive_list[$((drive_num-1))]}"
