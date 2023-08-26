@@ -10,3 +10,5 @@ I asked about a half dozen ai's to help me with this script and they helped a lo
 I did have to make a lot of changes, additions, and tweaks to get it to run properly.
 
 It has only been tested on sata and usb enclosures so far.  I'll test it on a nvme drive when I get a chance.
+
+Read: When a customer asks me to wipe one lol
