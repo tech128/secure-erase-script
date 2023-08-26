@@ -62,8 +62,9 @@ while true; do
     fi
 
     # Check if drive is frozen and unfreeze
-    if [ -f "/sys/block/${drive_list[$((drive_num-1))]}/queue/frozen" ]; then
-        echo "The selected drive appears to be frozen."
+    frozen_state=$(hdparm -I "/dev/${drive_list[$((drive_num-1))]}" 2>/dev/null | awk '/frozen/ { print $1,$2 }')
+    if [ "${frozen_state}" == "frozen " ]; then
+	echo "The selected drive appears to be frozen."
         echo "How would you like to unfreeze the drive?"
         echo "1. Run 'echo mem > /sys/power/state' to unfreeze"
         echo "2. Physically disconnect and reconnect the drive"
