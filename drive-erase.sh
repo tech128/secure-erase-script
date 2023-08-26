@@ -167,10 +167,10 @@ done
         nvme format "/dev/${drive_list[$((drive_num-1))]}" -s 1
     elif [ "$choice" -eq 5 ]; then
         echo "Trying secure blkdiscard first"
-        blkdiscard -s "/dev/${drive_list[$((drive_num-1))]}"
+        blkdiscard -s -f "/dev/${drive_list[$((drive_num-1))]}"
         errorlevel=$?
         if [ ${errorlevel} -ne 0 ]; then
-            blkdiscard "/dev/${drive_list[$((drive_num-1))]}"
+            blkdiscard -f "/dev/${drive_list[$((drive_num-1))]}"
         fi
     elif [ "$choice" -eq 6 ]; then
         nwipe --verify=off -m zero "/dev/${drive_list[$((drive_num-1))]}"
