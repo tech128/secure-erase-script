@@ -66,11 +66,11 @@ while true; do
     if [ "${frozen_state}" == "frozen " ]; then
         echo "The selected drive appears to be frozen."
         echo "How would you like to unfreeze the drive?"
-        echo "1. Run 'echo mem > /sys/power/state' to unfreeze"
+        echo "1. Run 'rtcwake -m mem -s 5' to unfreeze"
         echo "2. Physically disconnect and reconnect the drive"
         read -r choice
         if [ "$choice" -eq 1 ]; then
-            sh -c "echo mem > /sys/power/state"
+            sh -c "rtcwake -m mem -s 5"
         elif [ "$choice" -eq 2 ]; then
             echo "Please physically disconnect and reconnect the drive."
             read -rp "Hit enter key to continue..."
@@ -174,7 +174,7 @@ done
             blkdiscard -f "/dev/${drive_list[$((drive_num-1))]}"
         fi
     elif [ "$choice" -eq 6 ]; then
-        nwipe --verify=off -m zero "/dev/${drive_list[$((drive_num-1))]}"
+        nwipe --autonuke --noblank --nowait --verify=off -m zero "/dev/${drive_list[$((drive_num-1))]}"
         # dd if=/dev/zero of="/dev/${drive_list[$((drive_num-1))]}" bs=1M status=progress oflag=direct
     elif [ "$choice" -eq 7 ]; then
         echo "Exiting..."
